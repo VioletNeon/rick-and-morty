@@ -1,0 +1,24 @@
+.page-main {
+  grid-row: 2 / 3;
+  display: grid;
+  padding: 0 100px;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content min-content min-content;
+  background-image: url("../../../../src/image/BG-12.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border-top: 2px solid $basic-yellow-color;
+  border-bottom: 2px solid $middle-blue-color;
+}
+
+.page-main__title {
+  @include font-special(500);
+  @include font-size(30px, 14px);
+
+  grid-row: 1 / 2;
+  grid-column: 1 / 2;
+  color: $basic-cherry-color;
+  text-shadow: $middle-cherry-color 1px 1px 0.5px, $middle-cherry-color -1px -1px 0.5px, $black-color -2px -2px 0.5px, $bright-blue-color -1.5px -1.5px 1.5px, $bright-blue-color 1.5px 1.5px 1.5px;
+  text-align: center;
+  margin: 40px 0;
+}

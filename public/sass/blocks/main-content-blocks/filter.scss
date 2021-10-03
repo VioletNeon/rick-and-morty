@@ -1,0 +1,83 @@
+.filter {
+  grid-row: 2 / 3;
+  grid-column: 1 / 2;
+  padding: 0;
+  width: 100%;
+}
+
+.filter__form {
+  width: 100%;
+  position: relative;
+}
+
+.filter__field {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.filter__list {
+  @include reset-list-style();
+
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.filter__item {
+  width: 50%;
+  margin: 0;
+  padding: 5px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter__description {
+  @include font-special(500);
+  @include font-size(19px, 19px);
+
+  margin: auto 20px auto 50px;
+  color: $basic-purple-color;
+  width: 20%;
+  text-shadow: $middle-orange-color 1px 1px 1px;
+}
+
+.filter__select {
+  @include font-special(400);
+  @include font-size(19px, 19px);
+
+  margin: 0 50px 0 0;
+  padding: 8px 20px;
+  color: $basic-sand-color;
+  border: 1px solid $basic-sand-color;
+  width: 100%;
+  background-color: $middle-blue-color;
+  border-radius: 25px;
+
+  &:hover {
+    background-color: $opacity-cherry-color;
+    color: $middle-blue-color;
+    border: 1px solid $middle-blue-color;
+  }
+}
+
+.filter__button {
+  @include font-special(500);
+  @include font-size(19px, 19px);
+
+  position: absolute;
+  width: max-content;
+  background-color: $middle-blue-color;
+  color: $basic-sand-color;
+  padding: 10px 15px;
+  border-radius: 25px;
+  transform: translate(-140%, -110%);
+  left: 100%;
+  border: 2px solid $basic-cherry-color;
+
+  &:hover {
+    background-color: $opacity-cherry-color;
+    color: $middle-blue-color;
+    border: 2px solid $middle-blue-color;
+  }
+}
