@@ -2,8 +2,9 @@
   grid-row: 3 / 4;
   grid-column: 1 / 2;
   padding: 0;
-  margin: 30px 0 5px 0;
+  margin: 60px 0 5px 0;
   display: flex;
+  flex-direction: column;
 }
 
 .characters__wrapper {
@@ -16,6 +17,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  min-height: 600px;
 }
 
 .characters__item {
@@ -24,6 +26,7 @@
   width: 20%;
   flex-direction: column;
   margin: 0 0 30px 0;
+  max-height: 230px;
 }
 
 .characters__item img {
@@ -38,11 +41,13 @@
   @include font-size(14px, 20px);
 
   margin: 0;
-  padding: 10px 0;
+  padding: 10px 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  max-width: 100%;
   width: 150px;
+  aspect-ratio: auto 150 / auto;
   height: 100%;
   text-align: center;
   background-color: $opacity-black-color;
@@ -51,4 +56,31 @@
   border-radius: 0 0 30px 30px;
   border: 2px solid $middle-blue-color;
   border-top: none;
+}
+
+.characters__button-wrapper {
+  width: 100%;
+  margin: 0 0 20px 0;
+  padding: 0 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.characters__button {
+  @include font-special(500);
+  @include font-size(18px, 14px);
+
+  width: 200px;
+  padding: 10px 0;
+  color: $basic-orange-color;
+  background-color: $basic-purple-color;
+  border: 1px solid $basic-blue-color;
+  text-shadow: $basic-yellow-color 1px 1px 1px, $basic-yellow-color -1px -1px 1px, $basic-yellow-color 1px -1px 1px, $basic-yellow-color -1px 1px 1px;
+
+  &:hover {
+    color: $basic-purple-color;
+    background-color: $basic-blue-color;
+    border: 1px solid $basic-yellow-color;
+    text-shadow: $basic-orange-color 1px 1px 1px, $basic-orange-color -1px -1px 1px, $basic-orange-color 1px -1px 1px, $basic-orange-color -1px 1px 1px;
+  }
 }
