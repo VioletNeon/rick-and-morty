@@ -44,9 +44,10 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
   };
 
   const handleFormChange = () => {
-    const parameters = Array.from(formParameters.current.elements).filter((item) => item.tagName === ('SELECT' || 'select')).map((item) => item.value);
-    const isFormEmpty = parameters.every((item) => item === '');
-    isFormEmpty ? setFilterButtonState(true) : setFilterButtonState(false);
+    const selectElements = Array.from(formParameters.current.elements).filter((item) => item.tagName === ('SELECT' || 'select'));
+    const requiredSelectElements = selectElements.filter((item) => item.name === ('name' || 'type'));
+    const isFormEmpty = requiredSelectElements.every((item) => item.value === '');
+    setFilterButtonState(isFormEmpty);
   };
 
   const handleSelectNameChange = (evt) => {
@@ -54,6 +55,7 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
     if (evt.target.value !== '') {
       setSelectNameState(false);
     } else {
+      setFilterButtonState(true);
       setSelectNameState(true);
       resetAllSelect();
     }

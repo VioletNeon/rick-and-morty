@@ -45,7 +45,7 @@ function Popup({character, onModalStateSet}) {
             <p className="popup__description"><span>Species:</span> {species}</p>
           </li>
           <li className="popup__item">
-            <p className="popup__description"><span>Type:</span> {!type && '-'}</p>
+            <p className="popup__description"><span>Type:</span> {type}</p>
           </li>
           <li className="popup__item">
             <p className="popup__description"><span>First seen in:</span> {origin.name}</p>
