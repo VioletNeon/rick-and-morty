@@ -74,18 +74,19 @@ function Main() {
       <main className="page-main">
         <h1 className="page-main__title">Characters of &quot;The Rick and Morty&quot;</h1>
         {
+          filterParameters &&
+            <Filter
+              allCharactersInfo={filterParameters}
+              onFilterButtonClick={onFilterButtonClick}
+              onFilterResetButtonClick={onFilterResetButtonClick}
+            />
+        }
+        {
           loadedCharacters ?
-            <>
-              <Filter
-                allCharactersInfo={filterParameters}
-                onFilterButtonClick={onFilterButtonClick}
-                onFilterResetButtonClick={onFilterResetButtonClick}
-              />
-              <Characters
-                loadedCharacters={loadedCharacters}
-                loadedCharactersCount={loadedCharactersCount}
-              />
-            </> :
+            <Characters
+              loadedCharacters={loadedCharacters}
+              loadedCharactersCount={loadedCharactersCount}
+            /> :
             <LoadingScreen/>
         }
       </main>

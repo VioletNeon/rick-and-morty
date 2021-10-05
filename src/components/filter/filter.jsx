@@ -40,6 +40,7 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
     setSpecies('');
     setType('');
     setGender('');
+    setSelectNameState(true);
   };
 
   const handleFormChange = () => {
@@ -151,7 +152,10 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
         <button
           className="filter__button-reset button"
           type="button"
-          onClick={onFilterResetButtonClick}
+          onClick={() => {
+            onFilterResetButtonClick();
+            resetAllSelect();
+          }}
         >
           reset filter
         </button>
