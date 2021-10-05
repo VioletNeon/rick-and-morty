@@ -9,7 +9,7 @@ import LoadingScreen from '../loading-screen/loading-screen';
 const CHARACTERS_PAGE_LIST_LENGTH = 34;
 const MAX_CHARACTERS_COUNT = 680;
 
-const getAllCharactersInfo = (loadedCharacters) => {
+const getAllCharactersInfo = function (loadedCharacters) {
   return {
     originLocation: loadedCharacters.map((item) => item.origin.name),
     names: loadedCharacters.map((item) => item.name),
@@ -32,13 +32,13 @@ function Main() {
     return allCharacters.map((item) => item.data.results).flat(1);
   };
 
-  const loadFilteredCharacters = async (filterParameters) => {
-    const request = await getCharacters(filterParameters);
+  const loadFilteredCharacters = async (newFilterParameters) => {
+    const request = await getCharacters(newFilterParameters);
     if (request.status === 404) {return [];}
     const charactersCount = request.data.info.count;
     setLoadedCharactersCount(charactersCount);
     const charactersPageListLength = request.data.info.pages;
-    let filteredCharacters = [...request.data.results];
+    const filteredCharacters = [...request.data.results];
     if (charactersPageListLength > 1) {
       const requests = Array.from(Array(charactersPageListLength - 1).keys()).map((item) => getCharacters(Object.assign({page: item + 2}, filterParameters)));
       const allCharacters = await Promise.all(requests);
@@ -47,8 +47,8 @@ function Main() {
     return filteredCharacters;
   };
 
-  const onFilterButtonClick = (filterParameters) => {
-    loadFilteredCharacters(filterParameters).then((characters) => {
+  const onFilterButtonClick = (newParameters) => {
+    loadFilteredCharacters(newParameters).then((characters) => {
       setLoadedCharacters(null);
       setLoadedCharacters(characters);
     });

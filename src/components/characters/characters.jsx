@@ -7,9 +7,10 @@ const INITIAL_CHARACTERS_COUNT = 0;
 const PAGE_FACTOR = 2;
 
 function Characters({loadedCharacters, loadedCharactersCount}) {
-  if (!loadedCharacters.length) {return <p className="page-main__empty-list">Requested list is empty. Try another filter...</p>;}
   const [pageNumber, setPageNumber] = useState(SCREEN_CHARACTERS_COUNT);
   const [allCharacters, setAllCharacters] = useState(loadedCharacters.slice(INITIAL_CHARACTERS_COUNT, SCREEN_CHARACTERS_COUNT));
+
+  if (!loadedCharacters.length) {return <p className="page-main__empty-list">Requested list is empty. Try another filter...</p>;}
 
   const handlePageButtonClick = (evt) => {
     let nextPageCount;

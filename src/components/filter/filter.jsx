@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClick}) {
   const {names, statuses, species, types, genders, originLocation} = allCharactersInfo;
   const [isFilterButtonDisabled, setFilterButtonState] = useState(true);
+  const [isSelectNameDisabled, setSelectNameState] = useState(true);
   const nameParameter = useRef(null);
   const statusParameter = useRef(null);
   const speciesParameter = useRef(null);
@@ -33,6 +34,12 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
     isFormEmpty ? setFilterButtonState(true) : setFilterButtonState(false);
   };
 
+  const handleSelectNameChange = () => {
+    if (nameParameter.current.value !== 'NaN') {
+      setSelectNameState(false);
+    } else {setSelectNameState(true);}
+  };
+
   return (
     <section className="filter">
       <h2 className="visually-hidden">Characters filter</h2>
@@ -48,9 +55,10 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
                 size="1"
                 name="name"
                 ref={nameParameter}
+                onChange={handleSelectNameChange}
               >
                 <option value="NaN">select name</option>
-                {names.map((name, index) => <option value={name} key={name + index}>{name} from {originLocation[index]}</option>)}
+                {names.map((name, index) => <option value={name} key={name + String(index)}>{name} from {originLocation[index]}</option>)}
               </select>
             </li>
             <li className="filter__item">
@@ -61,9 +69,10 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
                 size="1"
                 name="status"
                 ref={statusParameter}
+                disabled={isSelectNameDisabled}
               >
-                <option value="NaN">select status</option>
-                {statuses.map((status, index) => <option value={status} key={status + index}>{status}</option>)}
+                <option value="NaN">select status, but at first select name</option>
+                {statuses.map((status) => <option value={status} key={status}>{status}</option>)}
               </select>
             </li>
             <li className="filter__item">
@@ -74,9 +83,10 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
                 size="1"
                 name="species"
                 ref={speciesParameter}
+                disabled={isSelectNameDisabled}
               >
-                <option value="NaN">select species</option>
-                {species.map((specie, index) => <option value={specie} key={specie + index}>{specie}</option>)}
+                <option value="NaN">select species, but at first select name</option>
+                {species.map((specie) => <option value={specie} key={specie}>{specie}</option>)}
               </select>
             </li>
             <li className="filter__item">
@@ -89,7 +99,7 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
                 ref={typeParameter}
               >
                 <option value="NaN">select type</option>
-                {types.map((type, index) => <option value={type} key={type + index}>{type}</option>).reverse()}
+                {types.map((type) => <option value={type} key={type}>{type}</option>).reverse()}
               </select>
             </li>
             <li className="filter__item">
@@ -100,9 +110,10 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
                 size="1"
                 name="gender"
                 ref={genderParameter}
+                disabled={isSelectNameDisabled}
               >
-                <option value="NaN">select gender</option>
-                {genders.map((gender, index) => <option value={gender} key={gender + index}>{gender}</option>)}
+                <option value="NaN">select gender, but at first select name</option>
+                {genders.map((gender) => <option value={gender} key={gender}>{gender}</option>)}
               </select>
             </li>
           </ul>
