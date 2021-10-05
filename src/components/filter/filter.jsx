@@ -88,7 +88,7 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
                 ref={typeParameter}
               >
                 <option value="NaN">select type</option>
-                {types.map((type, index) => <option value={type} key={type + index}>{type}</option>)}
+                {types.map((type, index) => <option value={type} key={type + index}>{type}</option>).reverse()}
               </select>
             </li>
             <li className="filter__item">

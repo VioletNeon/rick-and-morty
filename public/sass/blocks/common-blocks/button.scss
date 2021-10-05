@@ -13,4 +13,16 @@
     color: $middle-blue-color;
     border: 2px solid $middle-blue-color;
   }
+
+  &:focus {
+    background-color: $basic-sand-color;
+    color: $basic-cherry-color;
+    border: 2px solid $basic-cherry-color;
+  }
+
+  &:disabled {
+    color: $basic-sand-color;
+    background-color: $gray-color;
+    border: 2px solid $basic-cherry-color;
+  }
 }

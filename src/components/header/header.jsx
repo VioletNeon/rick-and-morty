@@ -16,10 +16,10 @@ function Header() {
               <Link className="main-nav__link main-nav__link--active" to="#">Main</Link>
             </li>
             <li className="main-nav__item">
-              <Link className="main-nav__link" to="#">Used API</Link>
+              <Link className="main-nav__link" to="https://rickandmortyapi.com/">Used API</Link>
             </li>
             <li className="main-nav__item">
-              <Link className="main-nav__link" to="#">About</Link>
+              <Link className="main-nav__link" to="https://rickandmortyapi.com/about">About</Link>
             </li>
           </ul>
         </nav>

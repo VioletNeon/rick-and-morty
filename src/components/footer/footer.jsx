@@ -7,13 +7,13 @@ function Footer() {
       <div className="page-footer__wrapper">
         <ul className="page-footer__info-list">
           <li className="page-footer__info-item">
-            <p>Characters:</p>
+            <p>Characters: 671</p>
           </li>
           <li className="page-footer__info-item">
-            <p>Locations:</p>
+            <p>Locations: 108</p>
           </li>
           <li className="page-footer__info-item">
-            <p>Episodes:</p>
+            <p>Episodes: 41</p>
           </li>
         </ul>
         <ul className="page-footer__social-list">

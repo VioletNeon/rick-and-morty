@@ -43,7 +43,7 @@
   }
 
   &--active {
-    text-shadow: $black-color 0.5px 0.5px 0.5px, $black-color -0.5px -0.5px 0.5px, $basic-yellow-color 2px 2px 0.5px, $basic-yellow-color -2px -2px 0.5px;
+    text-shadow: $black-color 0.5px 0.5px 0.5px, $black-color -0.5px -0.5px 0.5px, $black-color -0.5px 0.5px 0.5px, $black-color 0.5px -0.5px 0.5px, $basic-green-color 2px 2px 1px, $basic-green-color -2px -2px 1px, $basic-green-color -2px 2px 1px, $basic-green-color 2px -2px 1px;
     color: $basic-blue-color;
 
     &:after {
@@ -54,7 +54,7 @@
       top: 100%;
       border-radius: 5px;
       background-color: $basic-blue-color;
-      box-shadow: 0 0 1px 0.5px $black-color, 0 0 2px 2px $basic-yellow-color;
+      box-shadow: 0 0 1px 0.5px $black-color, 0 0 2px 2px $basic-green-color;
     }
   }
 }

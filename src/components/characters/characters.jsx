@@ -34,14 +34,6 @@ function Characters({loadedCharacters, loadedCharactersCount}) {
           {allCharacters.map((character) => <Character character={character} key={character.id}/>)}
         </ul>
       </div>
-      <div className="popup">
-        <img className="popup__image" src="https://rickandmortyapi.com/api/character/avatar/361.jpeg" alt="Character image" width="300" height="300"/>
-        <ul className="popup__list">
-          <li className="popup__item">
-            <p className="popup__description">Rick from Earth</p>
-          </li>
-        </ul>
-      </div>
       <div className="characters__button-wrapper">
         <button
           className="characters__button"
