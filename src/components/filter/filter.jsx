@@ -29,7 +29,7 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
   };
 
   const handleFormChange = () => {
-    const isFormEmpty = parameters.every(item => item.current.value === 'NaN');
+    const isFormEmpty = parameters.every((item) => item.current.value === 'NaN');
     isFormEmpty ? setFilterButtonState(true) : setFilterButtonState(false);
   };
 
@@ -124,7 +124,7 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
         </button>
       </form>
     </section>
-  )
+  );
 }
 
 Filter.propTypes = {

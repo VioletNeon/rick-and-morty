@@ -17,7 +17,7 @@ function Character({character}) {
       <p className="characters__description" onClick={onModalStateSet}>{name} from {origin.name}</p>
       {isPopupOpen && <Popup character={character} onModalStateSet={onModalStateSet}/>}
     </li>
-  )
+  );
 }
 
 Character.propTypes = {

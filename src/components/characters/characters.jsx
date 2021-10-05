@@ -54,7 +54,7 @@ function Characters({loadedCharacters, loadedCharactersCount}) {
         </button>
       </div>
     </section>
-  )
+  );
 }
 
 Characters.propTypes = {

@@ -61,7 +61,7 @@ function Popup({character, onModalStateSet}) {
         </button>
       </div>
     </div>
-  )
+  );
 }
 
 Popup.propTypes = {
