@@ -41,11 +41,12 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
     setType('');
     setGender('');
     setSelectNameState(true);
+    setFilterButtonState(true);
   };
 
   const handleFormChange = () => {
     const selectElements = Array.from(formParameters.current.elements).filter((item) => item.tagName === ('SELECT' || 'select'));
-    const requiredSelectElements = selectElements.filter((item) => item.name === ('name' || 'type'));
+    const requiredSelectElements = selectElements.filter((item) => item.name === 'name' || 'type');
     const isFormEmpty = requiredSelectElements.every((item) => item.value === '');
     setFilterButtonState(isFormEmpty);
   };
@@ -55,7 +56,6 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
     if (evt.target.value !== '') {
       setSelectNameState(false);
     } else {
-      setFilterButtonState(true);
       setSelectNameState(true);
       resetAllSelect();
     }
