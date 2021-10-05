@@ -5,11 +5,11 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
   const {names, statuses, species, types, genders, originLocation} = allCharactersInfo;
   const [isFilterButtonDisabled, setFilterButtonState] = useState(true);
   const [isSelectNameDisabled, setSelectNameState] = useState(true);
-  const [nameParameter, setName] = useState('NaN');
-  const [statusParameter, setStatus] = useState('NaN');
-  const [speciesParameter, setSpecies] = useState('NaN');
-  const [typeParameter, setType] = useState('NaN');
-  const [genderParameter, setGender] = useState('NaN');
+  const [nameParameter, setName] = useState('');
+  const [statusParameter, setStatus] = useState('');
+  const [speciesParameter, setSpecies] = useState('');
+  const [typeParameter, setType] = useState('');
+  const [genderParameter, setGender] = useState('');
   const formParameters = useRef(null);
 
   const setFilterParameters = () => {
@@ -22,7 +22,7 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
     };
 
     Object.keys(allParameters).forEach((parameter) => {
-      if (allParameters[parameter] === 'NaN') {
+      if (allParameters[parameter] === '') {
         delete allParameters[parameter];
       }
     });
@@ -35,22 +35,22 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
   };
 
   const resetAllSelect = () => {
-    setName('NaN');
-    setStatus('NaN');
-    setSpecies('NaN');
-    setType('NaN');
-    setGender('NaN');
+    setName('');
+    setStatus('');
+    setSpecies('');
+    setType('');
+    setGender('');
   };
 
   const handleFormChange = () => {
     const parameters = Array.from(formParameters.current.elements).filter((item) => item.tagName === ('SELECT' || 'select')).map((item) => item.value);
-    const isFormEmpty = parameters.every((item) => item === 'NaN');
+    const isFormEmpty = parameters.every((item) => item === '');
     isFormEmpty ? setFilterButtonState(true) : setFilterButtonState(false);
   };
 
   const handleSelectNameChange = (evt) => {
     setName(evt.target.value);
-    if (evt.target.value !== 'NaN') {
+    if (evt.target.value !== '') {
       setSelectNameState(false);
     } else {
       setSelectNameState(true);
@@ -75,7 +75,7 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
                 value={nameParameter}
                 onChange={handleSelectNameChange}
               >
-                <option value="NaN">select name</option>
+                <option value="">select name</option>
                 {names.map((name, index) => <option value={name} key={name + String(index)}>{name} from {originLocation[index]}</option>)}
               </select>
             </li>
@@ -90,7 +90,7 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
                 value={statusParameter}
                 onChange={(evt) => {setStatus(evt.target.value);}}
               >
-                <option value="NaN">select status, but at first select name</option>
+                <option value="">select status, but at first select name</option>
                 {statuses.map((status) => <option value={status} key={status}>{status}</option>)}
               </select>
             </li>
@@ -105,7 +105,7 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
                 value={speciesParameter}
                 onChange={(evt) => {setSpecies(evt.target.value);}}
               >
-                <option value="NaN">select species, but at first select name</option>
+                <option value="">select species, but at first select name</option>
                 {species.map((specie) => <option value={specie} key={specie}>{specie}</option>)}
               </select>
             </li>
@@ -119,7 +119,7 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
                 value={typeParameter}
                 onChange={(evt) => {setType(evt.target.value);}}
               >
-                <option value="NaN">select type</option>
+                <option value="">select type</option>
                 {types.map((type) => <option value={type} key={type}>{type}</option>).reverse()}
               </select>
             </li>
@@ -134,7 +134,7 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
                 value={genderParameter}
                 onChange={(evt) => {setGender(evt.target.value);}}
               >
-                <option value="NaN">select gender, but at first select name</option>
+                <option value="">select gender, but at first select name</option>
                 {genders.map((gender) => <option value={gender} key={gender}>{gender}</option>)}
               </select>
             </li>
