@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Popup from '../popup/popup';
+import PropTypes from 'prop-types';
 
 function Character({character}) {
   const {name, image, origin} = character;
@@ -18,5 +19,15 @@ function Character({character}) {
     </li>
   )
 }
+
+Character.propTypes = {
+  character: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    origin: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
 
 export default Character;

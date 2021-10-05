@@ -1,4 +1,5 @@
 import React, {useState, useRef} from 'react';
+import PropTypes from 'prop-types';
 
 function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClick}) {
   const {names, statuses, species, types, genders, originLocation} = allCharactersInfo;
@@ -27,7 +28,7 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
     onFilterButtonClick(setFilterParameters());
   };
 
-  const onFormChange = () => {
+  const handleFormChange = () => {
     const isFormEmpty = parameters.every(item => item.current.value === 'NaN');
     isFormEmpty ? setFilterButtonState(true) : setFilterButtonState(false);
   };
@@ -35,7 +36,7 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
   return (
     <section className="filter">
       <h2 className="visually-hidden">Characters filter</h2>
-      <form className="filter__form" method="post" onChange={onFormChange}>
+      <form className="filter__form" method="post" onChange={handleFormChange}>
         <fieldset className="filter__field">
           <legend className="visually-hidden">Filter</legend>
           <ul className="filter__list">
@@ -125,5 +126,18 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
     </section>
   )
 }
+
+Filter.propTypes = {
+  allCharactersInfo: PropTypes.shape({
+    names: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    statuses: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    species: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    types: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    genders: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    originLocation: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  }).isRequired,
+  onFilterButtonClick: PropTypes.func.isRequired,
+  onFilterResetButtonClick: PropTypes.func.isRequired,
+};
 
 export default Filter;

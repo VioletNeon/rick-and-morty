@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import PropTypes from 'prop-types';
 import Character from '../character/character';
 
 const SCREEN_CHARACTERS_COUNT = 10;
@@ -10,7 +11,7 @@ function Characters({loadedCharacters, loadedCharactersCount}) {
   const [pageNumber, setPageNumber] = useState(SCREEN_CHARACTERS_COUNT);
   const [allCharacters, setAllCharacters] = useState(loadedCharacters.slice(INITIAL_CHARACTERS_COUNT, SCREEN_CHARACTERS_COUNT));
 
-  const onPageButtonClick = (evt) => {
+  const handlePageButtonClick = (evt) => {
     let nextPageCount;
     let newPageCharacters;
     if (evt.target.value === 'next' && pageNumber < loadedCharactersCount) {
@@ -37,7 +38,7 @@ function Characters({loadedCharacters, loadedCharactersCount}) {
       <div className="characters__button-wrapper">
         <button
           className="characters__button"
-          onClick={onPageButtonClick}
+          onClick={handlePageButtonClick}
           disabled={pageNumber <= SCREEN_CHARACTERS_COUNT}
           value="previous"
         >
@@ -45,7 +46,7 @@ function Characters({loadedCharacters, loadedCharactersCount}) {
         </button>
         <button
           className="characters__button"
-          onClick={onPageButtonClick}
+          onClick={handlePageButtonClick}
           value="next"
           disabled={pageNumber >= loadedCharactersCount}
         >
@@ -55,5 +56,11 @@ function Characters({loadedCharacters, loadedCharactersCount}) {
     </section>
   )
 }
+
+Characters.propTypes = {
+  loadedCharacters: PropTypes.array.isRequired,
+  loadedCharactersCount: PropTypes.number.isRequired,
+};
+
 
 export default Characters;

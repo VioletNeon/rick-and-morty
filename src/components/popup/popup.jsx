@@ -1,5 +1,6 @@
 import React, {useRef, useEffect} from 'react';
 import {trapFocus} from '../../utils';
+import PropTypes from 'prop-types';
 
 const POPUP_CLASS_NAME = 'popup';
 const KEY_ESCAPE_CODE = 27;
@@ -62,5 +63,23 @@ function Popup({character, onModalStateSet}) {
     </div>
   )
 }
+
+Popup.propTypes = {
+  character: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    species: PropTypes.string.isRequired,
+    episode: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    type: PropTypes.string.isRequired,
+    origin: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+    location: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+  onModalStateSet: PropTypes.func.isRequired,
+};
 
 export default Popup;

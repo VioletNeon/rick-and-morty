@@ -25,14 +25,14 @@ function Main() {
   const [filterParameters, setFilterParameters] = useState(null);
   const [loadedCharactersCount, setLoadedCharactersCount] = useState(MAX_CHARACTERS_COUNT);
 
-  const getAllCharacters = async (pagesCount) => {
+  const loadAllCharacters = async (pagesCount) => {
     const requests = Array.from(Array(pagesCount).keys()).map(item => getCharacters({page: item + 1}));
     const allCharacters = await Promise.all(requests);
     setLoadedCharactersCount(MAX_CHARACTERS_COUNT);
     return allCharacters.map(item => item.data.results).flat(1);
   };
 
-  const getFilteredCharacters = async (filterParameters) => {
+  const loadFilteredCharacters = async (filterParameters) => {
     const request = await getCharacters(filterParameters);
     if (request.status === 404) {return []}
     const charactersCount = request.data.info.count;
@@ -48,21 +48,21 @@ function Main() {
   };
 
   const onFilterButtonClick = (filterParameters) => {
-    getFilteredCharacters(filterParameters).then((characters) => {
+    loadFilteredCharacters(filterParameters).then((characters) => {
       setLoadedCharacters(null);
       setLoadedCharacters(characters);
     });
   };
 
   const onFilterResetButtonClick = () => {
-    getAllCharacters(CHARACTERS_PAGE_LIST_LENGTH).then((characters) => {
+    loadAllCharacters(CHARACTERS_PAGE_LIST_LENGTH).then((characters) => {
       setLoadedCharacters(null);
       setLoadedCharacters(characters);
     });
   };
 
   useEffect(() => {
-    getAllCharacters(CHARACTERS_PAGE_LIST_LENGTH).then((characters) => {
+    loadAllCharacters(CHARACTERS_PAGE_LIST_LENGTH).then((characters) => {
       setFilterParameters(getAllCharactersInfo(characters));
       setLoadedCharacters(characters);
     });
