@@ -40,7 +40,7 @@ function Main() {
     const charactersPageListLength = request.data.info.pages;
     const filteredCharacters = [...request.data.results];
     if (charactersPageListLength > 1) {
-      const requests = Array.from(Array(charactersPageListLength - 1).keys()).map((item) => getCharacters(Object.assign({page: item + 2}, filterParameters)));
+      const requests = Array.from(Array(charactersPageListLength - 1).keys()).map((item) => getCharacters(Object.assign({page: item + 2}, newFilterParameters)));
       const allCharacters = await Promise.all(requests);
       return [...filteredCharacters, ...allCharacters.map((item) => item.data.results).flat(1)];
     }

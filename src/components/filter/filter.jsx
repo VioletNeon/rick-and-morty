@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClick}) {
   const {names, statuses, species, types, genders, originLocation} = allCharactersInfo;
   const [isFilterButtonDisabled, setFilterButtonState] = useState(true);
-  const [isSelectNameDisabled, setSelectNameState] = useState(true);
   const [nameParameter, setName] = useState('');
   const [statusParameter, setStatus] = useState('');
   const [speciesParameter, setSpecies] = useState('');
@@ -40,25 +39,13 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
     setSpecies('');
     setType('');
     setGender('');
-    setSelectNameState(true);
     setFilterButtonState(true);
   };
 
   const handleFormChange = () => {
     const selectElements = Array.from(formParameters.current.elements).filter((item) => item.tagName === ('SELECT' || 'select'));
-    const requiredSelectElements = selectElements.filter((item) => item.name === 'name' || 'type');
-    const isFormEmpty = requiredSelectElements.every((item) => item.value === '');
+    const isFormEmpty = selectElements.every((item) => item.value === '');
     setFilterButtonState(isFormEmpty);
-  };
-
-  const handleSelectNameChange = (evt) => {
-    setName(evt.target.value);
-    if (evt.target.value !== '') {
-      setSelectNameState(false);
-    } else {
-      setSelectNameState(true);
-      resetAllSelect();
-    }
   };
 
   return (
@@ -76,7 +63,7 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
                 size="1"
                 name="name"
                 value={nameParameter}
-                onChange={handleSelectNameChange}
+                onChange={(evt) => {setName(evt.target.value);}}
               >
                 <option value="">select name</option>
                 {names.map((name, index) => <option value={name} key={name + String(index)}>{name} from {originLocation[index]}</option>)}
@@ -89,11 +76,10 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
                 id="select-filter-status"
                 size="1"
                 name="status"
-                disabled={isSelectNameDisabled}
                 value={statusParameter}
                 onChange={(evt) => {setStatus(evt.target.value);}}
               >
-                <option value="">select status, but at first select name</option>
+                <option value="">select status</option>
                 {statuses.map((status) => <option value={status} key={status}>{status}</option>)}
               </select>
             </li>
@@ -104,11 +90,10 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
                 id="select-filter-species"
                 size="1"
                 name="species"
-                disabled={isSelectNameDisabled}
                 value={speciesParameter}
                 onChange={(evt) => {setSpecies(evt.target.value);}}
               >
-                <option value="">select species, but at first select name</option>
+                <option value="">select species</option>
                 {species.map((specie) => <option value={specie} key={specie}>{specie}</option>)}
               </select>
             </li>
@@ -133,11 +118,10 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
                 id="select-filter-gender"
                 size="1"
                 name="gender"
-                disabled={isSelectNameDisabled}
                 value={genderParameter}
                 onChange={(evt) => {setGender(evt.target.value);}}
               >
-                <option value="">select gender, but at first select name</option>
+                <option value="">select gender</option>
                 {genders.map((gender) => <option value={gender} key={gender}>{gender}</option>)}
               </select>
             </li>
