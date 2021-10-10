@@ -9,7 +9,17 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 function Main(props) {
-  const {characters, charactersInfo, onFilterButtonClick, onFilterResetButtonClick} = props;
+  const {
+    characters,
+    charactersInfo,
+    onFilterButtonClick,
+    onFilterResetButtonClick,
+    onFavoriteButtonClick,
+    onFilterFavoriteButtonClick,
+    pageNumber,
+    setPageNumber,
+    isOnlyFavorite
+  } = props;
 
   return (
     <>
@@ -22,12 +32,17 @@ function Main(props) {
               charactersInfo={charactersInfo}
               onFilterButtonClick={onFilterButtonClick}
               onFilterResetButtonClick={onFilterResetButtonClick}
+              onFilterFavoriteButtonClick={onFilterFavoriteButtonClick}
+              isOnlyFavorite={isOnlyFavorite}
             />
         }
         {
-          characters.length ?
+          characters ?
             <Characters
               loadedCharacters={characters}
+              onFavoriteButtonClick={onFavoriteButtonClick}
+              pageNumber={pageNumber}
+              setPageNumber={setPageNumber}
             /> :
             <LoadingScreen/>
         }
@@ -40,6 +55,8 @@ function Main(props) {
 const mapStateToProps = (state) => ({
   characters: state.filteredCharacters,
   charactersInfo: state.charactersInfo,
+  pageNumber: state.pageNumber,
+  isOnlyFavorite: state.isOnlyFavorite,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -49,13 +66,28 @@ const mapDispatchToProps = (dispatch) => ({
   onFilterResetButtonClick() {
     dispatch(ActionCreator.resetFilter());
   },
+  onFavoriteButtonClick(favoriteCharacterId) {
+    dispatch(ActionCreator.setFavoriteCharacter(favoriteCharacterId));
+  },
+  setPageNumber(favoriteCharacterId) {
+    dispatch(ActionCreator.setPageNumber(favoriteCharacterId));
+  },
+  onFilterFavoriteButtonClick(isOnlyFavorite) {
+    isOnlyFavorite ?
+      dispatch(ActionCreator.setOnlyFavorite(isOnlyFavorite)) :
+      dispatch(ActionCreator.resetOnlyFavorite(isOnlyFavorite));
+  },
 });
 
 Main.propTypes = {
-  characters: PropTypes.array.isRequired,
+  characters: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+  ]).isRequired,
   charactersInfo: PropTypes.object.isRequired,
   onFilterButtonClick: PropTypes.func.isRequired,
   onFilterResetButtonClick: PropTypes.func.isRequired,
+  onFavoriteButtonClick: PropTypes.func.isRequired,
 };
 
 export {Main};

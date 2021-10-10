@@ -6,13 +6,12 @@ const SCREEN_CHARACTERS_COUNT = 10;
 const INITIAL_CHARACTERS_COUNT = 0;
 const PAGE_FACTOR = 2;
 
-function Characters({loadedCharacters}) {
-  const [pageNumber, setPageNumber] = useState(SCREEN_CHARACTERS_COUNT);
+function Characters({loadedCharacters, onFavoriteButtonClick, pageNumber, setPageNumber}) {
   const [pageCharacters, setAllCharacters] = useState(loadedCharacters.slice(INITIAL_CHARACTERS_COUNT, SCREEN_CHARACTERS_COUNT));
 
   useEffect(() => {
-    setAllCharacters(loadedCharacters.slice(INITIAL_CHARACTERS_COUNT, SCREEN_CHARACTERS_COUNT));
-  }, [loadedCharacters]);
+    setAllCharacters(loadedCharacters.slice(pageNumber - SCREEN_CHARACTERS_COUNT, pageNumber));
+  }, [loadedCharacters, pageNumber]);
 
   if (!loadedCharacters.length) {return <p className="page-main__empty-list">Requested list is empty. Try another filter...</p>;}
 
@@ -37,7 +36,7 @@ function Characters({loadedCharacters}) {
       <h2 className="visually-hidden">Characters</h2>
       <div className="characters__wrapper">
         <ul className="characters__list">
-          {pageCharacters.map((character) => <Character character={character} key={character.id}/>)}
+          {pageCharacters.map((character) => <Character character={character} key={character.id} onFavoriteButtonClick={onFavoriteButtonClick}/>)}
         </ul>
       </div>
       <div className="characters__button-wrapper">
@@ -64,6 +63,7 @@ function Characters({loadedCharacters}) {
 
 Characters.propTypes = {
   loadedCharacters: PropTypes.array.isRequired,
+  onFavoriteButtonClick: PropTypes.func.isRequired,
 };
 
 

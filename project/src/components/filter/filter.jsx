@@ -1,16 +1,14 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 
 function Filter(props) {
-  const {charactersInfo, onFilterButtonClick, onFilterResetButtonClick} = props;
-  const {names, statuses, species, types, genders, originLocation} = charactersInfo;
+  const {charactersInfo, onFilterButtonClick, onFilterResetButtonClick, onFilterFavoriteButtonClick, isOnlyFavorite} = props;
   const [isFilterButtonDisabled, setFilterButtonState] = useState(true);
   const [nameFilter, setName] = useState('');
   const [statusFilter, setStatus] = useState('');
   const [speciesFilter, setSpecies] = useState('');
   const [typeFilter, setType] = useState('');
   const [genderFilter, setGender] = useState('');
-  const formParameters = useRef(null);
 
   const setFilterParameters = () => {
     const allParameters = {
@@ -43,16 +41,24 @@ function Filter(props) {
     onFilterButtonClick(setFilterParameters());
   };
 
-  const handleFormChange = () => {
-    const selectElements = Array.from(formParameters.current.elements).filter((item) => item.tagName === ('SELECT' || 'select'));
-    const isFormEmpty = selectElements.every((item) => item.value === '');
-    setFilterButtonState(isFormEmpty);
+  const handleResetFilterButtonClick = () => {
+    onFilterResetButtonClick();
+    resetAllSelect();
   };
+
+  const handleFilterFavoriteButtonClick = (evt) => {
+    onFilterFavoriteButtonClick(evt.target.checked);
+  };
+
+  useEffect(() => {
+    const isFormEmpty = [nameFilter, statusFilter, speciesFilter, typeFilter, genderFilter].every((item) => item === '');
+    setFilterButtonState(isFormEmpty);
+  }, [nameFilter, statusFilter, speciesFilter, typeFilter, genderFilter])
 
   return (
     <section className="filter">
       <h2 className="visually-hidden">Characters filter</h2>
-      <form className="filter__form" method="post" onChange={handleFormChange} ref={formParameters}>
+      <form className="filter__form" method="post">
         <fieldset className="filter__field">
           <legend className="visually-hidden">Filter</legend>
           <ul className="filter__list">
@@ -67,7 +73,7 @@ function Filter(props) {
                 onChange={(evt) => {setName(evt.target.value);}}
               >
                 <option value="">select name</option>
-                {names.map((name, index) => <option value={name} key={name + String(index)}>{name} from {originLocation[index]}</option>)}
+                {charactersInfo.names.map((name, index) => <option value={name} key={name + String(index)}>{name} from {charactersInfo.originLocation[index]}</option>)}
               </select>
             </li>
             <li className="filter__item">
@@ -81,7 +87,7 @@ function Filter(props) {
                 onChange={(evt) => {setStatus(evt.target.value);}}
               >
                 <option value="">select status</option>
-                {statuses.map((status) => <option value={status} key={status}>{status}</option>)}
+                {charactersInfo.statuses.map((status) => <option value={status} key={status}>{status}</option>)}
               </select>
             </li>
             <li className="filter__item">
@@ -95,7 +101,7 @@ function Filter(props) {
                 onChange={(evt) => {setSpecies(evt.target.value);}}
               >
                 <option value="">select species</option>
-                {species.map((specie) => <option value={specie} key={specie}>{specie}</option>)}
+                {charactersInfo.species.map((specie) => <option value={specie} key={specie}>{specie}</option>)}
               </select>
             </li>
             <li className="filter__item">
@@ -109,7 +115,7 @@ function Filter(props) {
                 onChange={(evt) => {setType(evt.target.value);}}
               >
                 <option value="">select type</option>
-                {types.map((type) => <option value={type} key={type}>{type}</option>).reverse()}
+                {charactersInfo.types.map((type) => <option value={type} key={type}>{type}</option>).reverse()}
               </select>
             </li>
             <li className="filter__item">
@@ -123,7 +129,7 @@ function Filter(props) {
                 onChange={(evt) => {setGender(evt.target.value);}}
               >
                 <option value="">select gender</option>
-                {genders.map((gender) => <option value={gender} key={gender}>{gender}</option>)}
+                {charactersInfo.genders.map((gender) => <option value={gender} key={gender}>{gender}</option>)}
               </select>
             </li>
           </ul>
@@ -139,13 +145,22 @@ function Filter(props) {
         <button
           className="filter__button-reset button"
           type="button"
-          onClick={() => {
-            onFilterResetButtonClick();
-            resetAllSelect();
-          }}
+          onClick={handleResetFilterButtonClick}
         >
           reset filter
         </button>
+        <label className="filter__favorite" aria-label="only favorite">
+          <input
+            className="visually-hidden"
+            type="checkbox"
+            onChange={handleFilterFavoriteButtonClick}
+            checked={isOnlyFavorite}
+          />
+          <svg className="filter__favorite-icon" xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 504 504" enableBackground='new 0 0 504 504' xmlSpace="preserve">
+            <circle fill="#48a3a1" cx="252" cy="252" r="252"/>
+            <path fill="#a83452" d="M331 115c-34 0-64 19-79 47a90 90 0 0 0-169 43c0 70 169 223 169 223s169-146 169-223c0-50-40-90-90-90z"/>
+          </svg>
+        </label>
       </form>
     </section>
   );
@@ -162,6 +177,7 @@ Filter.propTypes = {
   }).isRequired,
   onFilterButtonClick: PropTypes.func.isRequired,
   onFilterResetButtonClick: PropTypes.func.isRequired,
+  onFilterFavoriteButtonClick: PropTypes.func.isRequired,
 };
 
 export default Filter;

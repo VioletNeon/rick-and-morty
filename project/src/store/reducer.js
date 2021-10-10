@@ -19,10 +19,29 @@ const filterCharacters = (charactersList, filterParameters = []) => {
   return charactersList.filter((character) => filterParameters.every(([key, value]) => character[key] === value));
 };
 
+const filterOnlyFavoriteCharacters = (charactersList) => {
+  return charactersList.filter((character) => character.isFavorite);
+};
+
+const updateCharacters = (stateCharacters, updatedCharacter) => {
+  const updatedOfferIndex = stateCharacters.findIndex((character) => character.id === updatedCharacter.id);
+  return [...stateCharacters.slice(0, updatedOfferIndex), updatedCharacter, ...stateCharacters.slice(updatedOfferIndex + 1)];
+};
+
+const setCharacterFavoriteProperty = (characters) => {
+  return characters.map((character) => {
+    character.isFavorite = false;
+    return character;
+  });
+};
+
 const initialState = {
   characters: [],
-  filteredCharacters: [],
+  filteredCharacters: '',
   charactersInfo: {},
+  pageNumber: 10,
+  isOnlyFavorite: false,
+  backUpFilteredCharacters: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -30,19 +49,48 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_CHARACTERS:
       return {
         ...state,
-        characters: action.characters,
-        filteredCharacters: filterCharacters(action.characters),
+        characters: setCharacterFavoriteProperty(action.characters),
+        filteredCharacters: filterCharacters(setCharacterFavoriteProperty(action.characters)),
         charactersInfo: getAllCharactersInfo(action.characters),
       };
     case ActionType.FILTER_CHARACTERS:
       return {
         ...state,
-        filteredCharacters: filterCharacters(state.characters, action.payload),
+        filteredCharacters: state.isOnlyFavorite ? filterCharacters(state.filteredCharacters, action.payload) : filterCharacters(state.characters, action.payload),
+        pageNumber: initialState.pageNumber,
       };
     case ActionType.RESET_FILTER:
       return {
         ...state,
         filteredCharacters: filterCharacters(state.characters),
+        pageNumber: initialState.pageNumber,
+        isOnlyFavorite: false,
+      };
+    case ActionType.SET_FAVORITE_CHARACTER:
+      return {
+        ...state,
+        characters: updateCharacters(state.characters, action.favoriteCharacter),
+        filteredCharacters: updateCharacters(state.filteredCharacters, action.favoriteCharacter),
+      };
+    case ActionType.SET_PAGE_NUMBER:
+      return {
+        ...state,
+        pageNumber: action.pageNumber,
+      };
+    case ActionType.SET_ONLY_FAVORITE:
+      return {
+        ...state,
+        backUpFilteredCharacters: state.filteredCharacters,
+        filteredCharacters: filterOnlyFavoriteCharacters(state.filteredCharacters),
+        pageNumber: initialState.pageNumber,
+        isOnlyFavorite: action.payload,
+      };
+    case ActionType.RESET_ONLY_FAVORITE:
+      return {
+        ...state,
+        filteredCharacters: state.backUpFilteredCharacters,
+        pageNumber: initialState.pageNumber,
+        isOnlyFavorite: action.payload,
       };
     default:
       return state;

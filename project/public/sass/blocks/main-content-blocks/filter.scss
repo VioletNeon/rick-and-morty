@@ -74,3 +74,31 @@
   transform: translate(-145%, -95%);
   border-radius: 0 25px 25px 0;
 }
+
+.filter__favorite {
+  width: min-content;
+  position: absolute;
+  left: 100%;
+  transform: translate(-755%, -85%);
+  z-index: 1;
+}
+
+.filter__favorite input {
+  z-index: 2;
+}
+
+.filter__favorite input:checked ~ .filter__favorite-icon > path {
+  fill: $basic-cherry-color;
+}
+
+.filter__favorite input:checked ~ .filter__favorite-icon circle {
+  fill: $dark-blue-color;
+}
+
+.filter__favorite input ~ .filter__favorite-icon path {
+  fill: $middle-opacity-cherry-color;
+}
+
+.filter__favorite input ~ .filter__favorite-icon circle {
+  fill: $opacity-black-color;
+}

@@ -103,3 +103,35 @@
     text-shadow: $basic-purple-color 1px 1px 1px, $basic-purple-color -1px -1px 1px, $basic-purple-color 1px -1px 1px, $basic-purple-color -1px 1px 1px;
   }
 }
+
+.characters__favorite-wrapper {
+  position: relative;
+  height: 148px;
+}
+
+.characters__favorite {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  z-index: 1;
+}
+
+.characters__favorite input {
+  z-index: 2;
+}
+
+.characters__favorite input:checked ~ .characters__favorite-icon > path {
+  fill: $basic-cherry-color;
+}
+
+.characters__favorite input:checked ~ .characters__favorite-icon circle {
+  fill: $basic-blue-color;
+}
+
+.characters__favorite input ~ .characters__favorite-icon path {
+  fill: $middle-opacity-cherry-color;
+}
+
+.characters__favorite input ~ .characters__favorite-icon circle {
+  fill: $opacity-black-color;
+}
