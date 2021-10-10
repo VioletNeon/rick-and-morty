@@ -9,38 +9,53 @@ const ActionType = {
   DELETE_CHARACTER: 'deleteCharacter',
 };
 
-const ActionCreator = {
-  loadCharacters: (characters) => ({
-    type: ActionType.LOAD_CHARACTERS,
-    characters,
-  }),
-  filterCharacters: (payload) => ({
-    type: ActionType.FILTER_CHARACTERS,
-    payload,
-  }),
-  resetFilter: () => ({
-    type: ActionType.RESET_FILTER,
-  }),
-  setFavoriteCharacter: (favoriteCharacter) => ({
-    type: ActionType.SET_FAVORITE_CHARACTER,
-    favoriteCharacter: favoriteCharacter,
-  }),
-  setPageNumber: (pageNumber) => ({
-    type: ActionType.SET_PAGE_NUMBER,
-    pageNumber,
-  }),
-  setOnlyFavorite: (isOnlyFavorite) => ({
-    type: ActionType.SET_ONLY_FAVORITE,
-    payload: isOnlyFavorite,
-  }),
-  resetOnlyFavorite: (isOnlyFavorite) => ({
-    type: ActionType.RESET_ONLY_FAVORITE,
-    payload: isOnlyFavorite,
-  }),
-  deleteCharacter: (deletedCharacterId) => ({
-    type: ActionType.DELETE_CHARACTER,
-    deletedCharacterId,
-  }),
-};
+const loadCharacters = (characters) => ({
+  type: ActionType.LOAD_CHARACTERS,
+  characters,
+});
 
-export {ActionType, ActionCreator};
+const filterCharacters = (payload) => ({
+  type: ActionType.FILTER_CHARACTERS,
+  payload,
+});
+
+const resetFilter = () => ({
+  type: ActionType.RESET_FILTER,
+});
+
+const setFavoriteCharacter = (favoriteCharacter) => ({
+  type: ActionType.SET_FAVORITE_CHARACTER,
+  favoriteCharacter: favoriteCharacter,
+});
+
+const setPageNumber = (pageNumber) => ({
+  type: ActionType.SET_PAGE_NUMBER,
+  pageNumber,
+});
+
+const setOnlyFavorite = (isOnlyFavorite) => ({
+  type: ActionType.SET_ONLY_FAVORITE,
+  payload: isOnlyFavorite,
+});
+
+const resetOnlyFavorite = (isOnlyFavorite) => ({
+  type: ActionType.RESET_ONLY_FAVORITE,
+  payload: isOnlyFavorite,
+});
+
+const deleteCharacter = (deletedCharacterId) => ({
+  type: ActionType.DELETE_CHARACTER,
+  deletedCharacterId,
+});
+
+export {
+  ActionType,
+  loadCharacters,
+  filterCharacters,
+  resetFilter,
+  setFavoriteCharacter,
+  setPageNumber,
+  setOnlyFavorite,
+  resetOnlyFavorite,
+  deleteCharacter
+};

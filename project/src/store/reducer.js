@@ -23,6 +23,7 @@ const filterOnlyFavoriteCharacters = (charactersList) => charactersList.filter((
 
 const updateCharacters = (stateCharacters, updatedCharacter) => {
   const updatedOfferIndex = stateCharacters.findIndex((character) => character.id === updatedCharacter.id);
+  if (updatedOfferIndex === -1) {return stateCharacters;}
   return [...stateCharacters.slice(0, updatedOfferIndex), updatedCharacter, ...stateCharacters.slice(updatedOfferIndex + 1)];
 };
 
@@ -39,11 +40,13 @@ const setCharacterFavoriteProperty = function (characters) {
   });
 };
 
+const PAGE_CHARACTERS_COUNT = 10;
+
 const initialState = {
   characters: [],
   filteredCharacters: '',
   charactersInfo: {},
-  pageNumber: 10,
+  pageNumber: PAGE_CHARACTERS_COUNT,
   isOnlyFavorite: false,
   backUpFilteredCharacters: [],
 };
@@ -75,6 +78,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         characters: updateCharacters(state.characters, action.favoriteCharacter),
         filteredCharacters: updateCharacters(state.filteredCharacters, action.favoriteCharacter),
+        backUpFilteredCharacters: state.backUpFilteredCharacters.length ? updateCharacters(state.backUpFilteredCharacters, action.favoriteCharacter) : [],
       };
     case ActionType.SET_PAGE_NUMBER:
       return {

@@ -1,6 +1,6 @@
 import React, {useRef, useEffect} from 'react';
-import {trapFocus} from '../../utils';
 import PropTypes from 'prop-types';
+import {trapFocus} from '../../utils';
 
 const POPUP_CLASS_NAME = 'popup';
 const KEY_ESCAPE_CODE = 27;

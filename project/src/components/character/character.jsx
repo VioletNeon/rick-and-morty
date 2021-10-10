@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import Popup from '../popup/popup';
 import PropTypes from 'prop-types';
+import Popup from '../popup/popup';
 
 function Character({character, onFavoriteButtonClick, deleteCharacter}) {
   const {name, image, origin, id, isFavorite} = character;
