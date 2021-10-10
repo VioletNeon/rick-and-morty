@@ -1,23 +1,24 @@
 import React, {useRef, useState} from 'react';
 import PropTypes from 'prop-types';
 
-function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClick}) {
-  const {names, statuses, species, types, genders, originLocation} = allCharactersInfo;
+function Filter(props) {
+  const {charactersInfo, onFilterButtonClick, onFilterResetButtonClick} = props;
+  const {names, statuses, species, types, genders, originLocation} = charactersInfo;
   const [isFilterButtonDisabled, setFilterButtonState] = useState(true);
-  const [nameParameter, setName] = useState('');
-  const [statusParameter, setStatus] = useState('');
-  const [speciesParameter, setSpecies] = useState('');
-  const [typeParameter, setType] = useState('');
-  const [genderParameter, setGender] = useState('');
+  const [nameFilter, setName] = useState('');
+  const [statusFilter, setStatus] = useState('');
+  const [speciesFilter, setSpecies] = useState('');
+  const [typeFilter, setType] = useState('');
+  const [genderFilter, setGender] = useState('');
   const formParameters = useRef(null);
 
   const setFilterParameters = () => {
     const allParameters = {
-      name: nameParameter,
-      status: statusParameter,
-      species: speciesParameter,
-      type: typeParameter,
-      gender: genderParameter,
+      name: nameFilter,
+      status: statusFilter,
+      species: speciesFilter,
+      type: typeFilter,
+      gender: genderFilter,
     };
 
     Object.keys(allParameters).forEach((parameter) => {
@@ -25,12 +26,7 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
         delete allParameters[parameter];
       }
     });
-    return allParameters;
-  };
-
-  const handleApplyFilterButtonClick = (evt) => {
-    evt.preventDefault();
-    onFilterButtonClick(setFilterParameters());
+    return Object.entries(allParameters);
   };
 
   const resetAllSelect = () => {
@@ -40,6 +36,11 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
     setType('');
     setGender('');
     setFilterButtonState(true);
+  };
+
+  const handleApplyFilterButtonClick = (evt) => {
+    evt.preventDefault();
+    onFilterButtonClick(setFilterParameters());
   };
 
   const handleFormChange = () => {
@@ -62,7 +63,7 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
                 id="select-filter-name"
                 size="1"
                 name="name"
-                value={nameParameter}
+                value={nameFilter}
                 onChange={(evt) => {setName(evt.target.value);}}
               >
                 <option value="">select name</option>
@@ -76,7 +77,7 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
                 id="select-filter-status"
                 size="1"
                 name="status"
-                value={statusParameter}
+                value={statusFilter}
                 onChange={(evt) => {setStatus(evt.target.value);}}
               >
                 <option value="">select status</option>
@@ -90,7 +91,7 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
                 id="select-filter-species"
                 size="1"
                 name="species"
-                value={speciesParameter}
+                value={speciesFilter}
                 onChange={(evt) => {setSpecies(evt.target.value);}}
               >
                 <option value="">select species</option>
@@ -104,7 +105,7 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
                 id="select-filter-type"
                 size="1"
                 name="type"
-                value={typeParameter}
+                value={typeFilter}
                 onChange={(evt) => {setType(evt.target.value);}}
               >
                 <option value="">select type</option>
@@ -118,7 +119,7 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
                 id="select-filter-gender"
                 size="1"
                 name="gender"
-                value={genderParameter}
+                value={genderFilter}
                 onChange={(evt) => {setGender(evt.target.value);}}
               >
                 <option value="">select gender</option>
@@ -151,7 +152,7 @@ function Filter({allCharactersInfo, onFilterButtonClick, onFilterResetButtonClic
 }
 
 Filter.propTypes = {
-  allCharactersInfo: PropTypes.shape({
+  charactersInfo: PropTypes.shape({
     names: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     statuses: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     species: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,

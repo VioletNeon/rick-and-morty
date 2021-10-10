@@ -27,4 +27,5 @@ const trapFocus = (element) => {
   });
 };
 
+
 export {trapFocus};
