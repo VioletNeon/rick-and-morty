@@ -6,7 +6,7 @@ const SCREEN_CHARACTERS_COUNT = 10;
 const INITIAL_CHARACTERS_COUNT = 0;
 const PAGE_FACTOR = 2;
 
-function Characters({loadedCharacters, onFavoriteButtonClick, pageNumber, setPageNumber}) {
+function Characters({loadedCharacters, onFavoriteButtonClick, pageNumber, setPageNumber, deleteCharacter}) {
   const [pageCharacters, setAllCharacters] = useState(loadedCharacters.slice(INITIAL_CHARACTERS_COUNT, SCREEN_CHARACTERS_COUNT));
 
   useEffect(() => {
@@ -36,7 +36,7 @@ function Characters({loadedCharacters, onFavoriteButtonClick, pageNumber, setPag
       <h2 className="visually-hidden">Characters</h2>
       <div className="characters__wrapper">
         <ul className="characters__list">
-          {pageCharacters.map((character) => <Character character={character} key={character.id} onFavoriteButtonClick={onFavoriteButtonClick}/>)}
+          {pageCharacters.map((character) => <Character character={character} key={character.id} onFavoriteButtonClick={onFavoriteButtonClick} deleteCharacter={deleteCharacter}/>)}
         </ul>
       </div>
       <div className="characters__button-wrapper">
@@ -62,8 +62,11 @@ function Characters({loadedCharacters, onFavoriteButtonClick, pageNumber, setPag
 }
 
 Characters.propTypes = {
+  pageNumber: PropTypes.number.isRequired,
   loadedCharacters: PropTypes.array.isRequired,
   onFavoriteButtonClick: PropTypes.func.isRequired,
+  setPageNumber: PropTypes.func.isRequired,
+  deleteCharacter: PropTypes.func.isRequired,
 };
 
 

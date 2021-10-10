@@ -57,7 +57,7 @@ function Popup({character, onModalStateSet}) {
             <p className="popup__description"><span>Episodes:</span> {episodes}</p>
           </li>
         </ul>
-        <button className="popup__popup-close-button" type="button" aria-label="Закрыть" onClick={onModalStateSet} tabIndex="0">
+        <button className="popup__popup-close-button" type="button" aria-label="Close" onClick={onModalStateSet} tabIndex="0">
         </button>
       </div>
     </div>

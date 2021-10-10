@@ -19,16 +19,20 @@ const filterCharacters = (charactersList, filterParameters = []) => {
   return charactersList.filter((character) => filterParameters.every(([key, value]) => character[key] === value));
 };
 
-const filterOnlyFavoriteCharacters = (charactersList) => {
-  return charactersList.filter((character) => character.isFavorite);
-};
+const filterOnlyFavoriteCharacters = (charactersList) => charactersList.filter((character) => character.isFavorite);
 
 const updateCharacters = (stateCharacters, updatedCharacter) => {
   const updatedOfferIndex = stateCharacters.findIndex((character) => character.id === updatedCharacter.id);
   return [...stateCharacters.slice(0, updatedOfferIndex), updatedCharacter, ...stateCharacters.slice(updatedOfferIndex + 1)];
 };
 
-const setCharacterFavoriteProperty = (characters) => {
+const deleteCharacter = (stateCharacters, deletedCharacterId) => {
+  const updatedOfferIndex = stateCharacters.findIndex((character) => character.id === +deletedCharacterId);
+  if (updatedOfferIndex === -1) {return stateCharacters;}
+  return [...stateCharacters.slice(0, updatedOfferIndex), ...stateCharacters.slice(updatedOfferIndex + 1)];
+};
+
+const setCharacterFavoriteProperty = function (characters) {
   return characters.map((character) => {
     character.isFavorite = false;
     return character;
@@ -91,6 +95,13 @@ const reducer = (state = initialState, action) => {
         filteredCharacters: state.backUpFilteredCharacters,
         pageNumber: initialState.pageNumber,
         isOnlyFavorite: action.payload,
+      };
+    case ActionType.DELETE_CHARACTER:
+      return {
+        ...state,
+        filteredCharacters: deleteCharacter(state.filteredCharacters, action.deletedCharacterId),
+        characters: deleteCharacter(state.characters, action.deletedCharacterId),
+        backUpFilteredCharacters: state.backUpFilteredCharacters.length ? deleteCharacter(state.backUpFilteredCharacters, action.deletedCharacterId) : [],
       };
     default:
       return state;

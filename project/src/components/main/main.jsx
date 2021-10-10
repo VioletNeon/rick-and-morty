@@ -12,13 +12,14 @@ function Main(props) {
   const {
     characters,
     charactersInfo,
+    deleteCharacter,
     onFilterButtonClick,
     onFilterResetButtonClick,
     onFavoriteButtonClick,
     onFilterFavoriteButtonClick,
     pageNumber,
     setPageNumber,
-    isOnlyFavorite
+    isOnlyFavorite,
   } = props;
 
   return (
@@ -43,6 +44,7 @@ function Main(props) {
               onFavoriteButtonClick={onFavoriteButtonClick}
               pageNumber={pageNumber}
               setPageNumber={setPageNumber}
+              deleteCharacter={deleteCharacter}
             /> :
             <LoadingScreen/>
         }
@@ -66,16 +68,19 @@ const mapDispatchToProps = (dispatch) => ({
   onFilterResetButtonClick() {
     dispatch(ActionCreator.resetFilter());
   },
-  onFavoriteButtonClick(favoriteCharacterId) {
-    dispatch(ActionCreator.setFavoriteCharacter(favoriteCharacterId));
+  onFavoriteButtonClick(favoriteCharacter) {
+    dispatch(ActionCreator.setFavoriteCharacter(favoriteCharacter));
   },
-  setPageNumber(favoriteCharacterId) {
-    dispatch(ActionCreator.setPageNumber(favoriteCharacterId));
+  setPageNumber(pageNumber) {
+    dispatch(ActionCreator.setPageNumber(pageNumber));
   },
   onFilterFavoriteButtonClick(isOnlyFavorite) {
     isOnlyFavorite ?
       dispatch(ActionCreator.setOnlyFavorite(isOnlyFavorite)) :
       dispatch(ActionCreator.resetOnlyFavorite(isOnlyFavorite));
+  },
+  deleteCharacter(deletedCharacterId) {
+    dispatch(ActionCreator.deleteCharacter(deletedCharacterId));
   },
 });
 
@@ -88,6 +93,11 @@ Main.propTypes = {
   onFilterButtonClick: PropTypes.func.isRequired,
   onFilterResetButtonClick: PropTypes.func.isRequired,
   onFavoriteButtonClick: PropTypes.func.isRequired,
+  deleteCharacter: PropTypes.func.isRequired,
+  onFilterFavoriteButtonClick: PropTypes.func.isRequired,
+  pageNumber: PropTypes.number.isRequired,
+  setPageNumber: PropTypes.func.isRequired,
+  isOnlyFavorite: PropTypes.bool.isRequired,
 };
 
 export {Main};

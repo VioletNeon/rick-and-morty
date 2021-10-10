@@ -6,6 +6,7 @@ const ActionType = {
   SET_PAGE_NUMBER: 'setPageNumber',
   SET_ONLY_FAVORITE: 'setOnlyFavorite',
   RESET_ONLY_FAVORITE: 'resetOnlyFavorite',
+  DELETE_CHARACTER: 'deleteCharacter',
 };
 
 const ActionCreator = {
@@ -35,6 +36,10 @@ const ActionCreator = {
   resetOnlyFavorite: (isOnlyFavorite) => ({
     type: ActionType.RESET_ONLY_FAVORITE,
     payload: isOnlyFavorite,
+  }),
+  deleteCharacter: (deletedCharacterId) => ({
+    type: ActionType.DELETE_CHARACTER,
+    deletedCharacterId,
   }),
 };
 

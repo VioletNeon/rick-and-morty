@@ -53,7 +53,7 @@ function Filter(props) {
   useEffect(() => {
     const isFormEmpty = [nameFilter, statusFilter, speciesFilter, typeFilter, genderFilter].every((item) => item === '');
     setFilterButtonState(isFormEmpty);
-  }, [nameFilter, statusFilter, speciesFilter, typeFilter, genderFilter])
+  }, [nameFilter, statusFilter, speciesFilter, typeFilter, genderFilter]);
 
   return (
     <section className="filter">
@@ -175,6 +175,7 @@ Filter.propTypes = {
     genders: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     originLocation: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   }).isRequired,
+  isOnlyFavorite: PropTypes.bool.isRequired,
   onFilterButtonClick: PropTypes.func.isRequired,
   onFilterResetButtonClick: PropTypes.func.isRequired,
   onFilterFavoriteButtonClick: PropTypes.func.isRequired,

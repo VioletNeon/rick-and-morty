@@ -135,3 +135,41 @@
 .characters__favorite input ~ .characters__favorite-icon circle {
   fill: $opacity-black-color;
 }
+
+.characters__delete-button {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  width: 22px;
+  height: 22px;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+.characters__delete-button::before,
+.characters__delete-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 5px;
+  width: 22px;
+  height: 3px;
+  background-color: $dark-blue-color;
+  opacity: 0.4;
+}
+
+.characters__item:hover .characters__delete-button::before,
+.characters__item:hover .characters__delete-button::after {
+  background-color: $middle-cherry-color;
+  opacity: 1;
+}
+
+.characters__delete-button::before {
+  transform: rotate(45deg);
+}
+
+.characters__delete-button::after {
+  transform: rotate(-45deg);
+}

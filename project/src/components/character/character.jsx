@@ -2,14 +2,18 @@ import React, {useState} from 'react';
 import Popup from '../popup/popup';
 import PropTypes from 'prop-types';
 
-function Character({character, onFavoriteButtonClick}) {
-  const {name, image, origin, id} = character;
-  const [isFavoriteActive, setFavoriteState] = useState(character.isFavorite);
+function Character({character, onFavoriteButtonClick, deleteCharacter}) {
+  const {name, image, origin, id, isFavorite} = character;
+  const [isFavoriteActive, setFavoriteState] = useState(isFavorite);
   const [isPopupOpen, setModalState] = useState(false);
 
   const onModalStateSet = () => {
     setModalState(!isPopupOpen);
     document.body.style.overflow = isPopupOpen ? 'visible' : 'hidden';
+  };
+
+  const handleDeleteButtonClick = () => {
+    deleteCharacter(id);
   };
 
   const handleFavoriteButtonClick = (evt) => {
@@ -30,6 +34,8 @@ function Character({character, onFavoriteButtonClick}) {
           </svg>
         </label>
         <img className="characters__image" src={image} alt="Character" width="150" height="150" onClick={onModalStateSet}/>
+        <button className="characters__delete-button" type="button" aria-label="Delete" tabIndex="0" onClick={handleDeleteButtonClick}>
+        </button>
       </div>
       <p className="characters__description" onClick={onModalStateSet}>{name} from {origin.name}</p>
       {isPopupOpen && <Popup character={character} onModalStateSet={onModalStateSet}/>}
@@ -39,9 +45,12 @@ function Character({character, onFavoriteButtonClick}) {
 
 Character.propTypes = {
   onFavoriteButtonClick: PropTypes.func.isRequired,
+  deleteCharacter: PropTypes.func.isRequired,
   character: PropTypes.shape({
     name: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
     origin: PropTypes.shape({
       name: PropTypes.string.isRequired,
     }).isRequired,
