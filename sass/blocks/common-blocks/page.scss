@@ -1,0 +1,18 @@
+.page {
+  @include font-size(14px, 18px);
+
+  box-sizing: border-box;
+  font-family: "Roboto", "Arial", sans-serif;
+  font-weight: 400;
+  color: $black-color;
+  margin: 0;
+  padding: 0;
+
+}
+
+.page__body {
+  margin: 0 auto;
+  padding: 0;
+  display: grid;
+  grid-template-rows: max-content min-content min-content;
+}

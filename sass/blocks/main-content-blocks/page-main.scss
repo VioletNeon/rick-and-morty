@@ -1,0 +1,56 @@
+.page-main {
+  grid-row: 2 / 3;
+  display: grid;
+  padding: 0 100px;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content min-content min-content;
+  background-image: url("../../../../src/image/BG-12.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border-top: 2px solid $basic-green-color;
+  border-bottom: 2px solid $middle-blue-color;
+}
+
+.page-main__title {
+  @include font-special(500);
+  @include font-size(30px, 14px);
+
+  grid-row: 1 / 2;
+  grid-column: 1 / 2;
+  color: $basic-cherry-color;
+  text-shadow: $middle-cherry-color 1px 1px 0.5px, $middle-cherry-color -1px -1px 0.5px, $black-color -2px -2px 0.5px, $bright-blue-color -1.5px -1.5px 1.5px, $bright-blue-color 1.5px 1.5px 1.5px;
+  text-align: center;
+  margin: 50px 0;
+}
+
+.page-main__loading {
+  @include font-special(700);
+  @include font-size(56px, 29px);
+
+  padding: 0;
+  margin: 0;
+  height: 700px;
+  width: 100%;
+  color: $middle-cherry-color;
+  text-shadow: $basic-blue-color 2px 2px 1px, $basic-blue-color -2px -2px 1px, $basic-blue-color 2px -2px 1px, $basic-blue-color -2px 2px 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("../../../../src/image/loading.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 400px 400px;
+}
+
+.page-main__empty-list {
+  @include font-special(700);
+  @include font-size(56px, 29px);
+
+  height: 500px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $basic-orange-color;
+  text-shadow: $middle-cherry-color 2px 2px 1px, $middle-cherry-color -2px -2px 1px, $middle-cherry-color 2px -2px 1px, $middle-cherry-color -2px 2px 1px;
+}

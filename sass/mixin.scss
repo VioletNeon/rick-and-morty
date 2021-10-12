@@ -1,0 +1,22 @@
+@mixin font-special($font-weight) {
+  font-family: "Roboto", "Arial", sans-serif;
+  font-weight: $font-weight;
+}
+
+@mixin font-size($size, $l-height) {
+  font-size: $size;
+  line-height: $l-height;
+}
+
+@mixin position-zero() {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@mixin reset-list-style() {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}

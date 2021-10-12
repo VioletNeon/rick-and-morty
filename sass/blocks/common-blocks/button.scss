@@ -1,0 +1,28 @@
+.button {
+  @include font-special(500);
+  @include font-size(17px, 19px);
+
+  width: max-content;
+  background-color: $middle-blue-color;
+  color: $basic-sand-color;
+  padding: 10px 15px;
+  border: 2px solid $basic-cherry-color;
+
+  &:hover {
+    background-color: $opacity-cherry-color;
+    color: $middle-blue-color;
+    border: 2px solid $middle-blue-color;
+  }
+
+  &:focus {
+    background-color: $basic-sand-color;
+    color: $basic-cherry-color;
+    border: 2px solid $basic-cherry-color;
+  }
+
+  &:disabled {
+    color: $basic-sand-color;
+    background-color: $gray-color;
+    border: 2px solid $basic-cherry-color;
+  }
+}

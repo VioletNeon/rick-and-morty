@@ -1,0 +1,175 @@
+.characters {
+  grid-row: 3 / 4;
+  grid-column: 1 / 2;
+  padding: 0;
+  margin: 60px 0 5px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.characters__wrapper {
+  width: 100%;
+}
+
+.characters__list {
+  @include reset-list-style();
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  min-height: 600px;
+}
+
+.characters__item {
+  display: flex;
+  align-items: center;
+  width: 20%;
+  flex-direction: column;
+  margin: 0 0 30px 0;
+  max-height: 230px;
+}
+
+.characters__item:hover .characters__image,
+.characters__item:hover .characters__description {
+  box-shadow: 0 0 15px 10px $middle-blue-color;
+}
+
+.characters__image {
+  border-radius: 30px 30px 0 0;
+  border: 2px solid $middle-blue-color;
+  border-bottom: none;
+  opacity: 0.9;
+}
+
+.characters__description {
+  @include font-special(500);
+  @include font-size(14px, 20px);
+
+  margin: 0;
+  padding: 10px 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 100%;
+  width: 150px;
+  aspect-ratio: auto 150 / auto;
+  height: 100%;
+  text-align: center;
+  background-color: $opacity-black-color;
+  color: $bright-gray-color;
+  text-shadow: $basic-sand-color 1px 1px 1px;
+  border-radius: 0 0 30px 30px;
+  border: 2px solid $middle-blue-color;
+  border-top: none;
+}
+
+.characters__button-wrapper {
+  width: 100%;
+  margin: 0 0 20px 0;
+  padding: 0 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.characters__button {
+  @include font-special(500);
+  @include font-size(18px, 14px);
+
+  width: 200px;
+  padding: 10px 0;
+  color: $basic-orange-color;
+  background-color: $basic-purple-color;
+  border: 1px solid $basic-blue-color;
+  text-shadow: $basic-yellow-color 1px 1px 1px, $basic-yellow-color -1px -1px 1px, $basic-yellow-color 1px -1px 1px, $basic-yellow-color -1px 1px 1px;
+
+  &:hover {
+    color: $basic-purple-color;
+    background-color: $basic-blue-color;
+    border: 1px solid $basic-yellow-color;
+    text-shadow: $basic-orange-color 1px 1px 1px, $basic-orange-color -1px -1px 1px, $basic-orange-color 1px -1px 1px, $basic-orange-color -1px 1px 1px;
+  }
+
+  &:focus {
+    color: $basic-yellow-color;
+    background-color: $basic-orange-color;
+    border: 1px solid $basic-blue-color;
+    text-shadow: $basic-purple-color 1px 1px 1px, $basic-purple-color -1px -1px 1px, $basic-purple-color 1px -1px 1px, $basic-purple-color -1px 1px 1px;
+  }
+
+  &:disabled {
+    color: $light-gray-color;
+    background-color: $gray-color;
+    border: 1px solid $middle-blue-color;
+    text-shadow: $basic-purple-color 1px 1px 1px, $basic-purple-color -1px -1px 1px, $basic-purple-color 1px -1px 1px, $basic-purple-color -1px 1px 1px;
+  }
+}
+
+.characters__favorite-wrapper {
+  position: relative;
+  height: 148px;
+}
+
+.characters__favorite {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  z-index: 1;
+}
+
+.characters__favorite input {
+  z-index: 2;
+}
+
+.characters__favorite input:checked ~ .characters__favorite-icon > path {
+  fill: $basic-cherry-color;
+}
+
+.characters__favorite input:checked ~ .characters__favorite-icon circle {
+  fill: $basic-blue-color;
+}
+
+.characters__favorite input ~ .characters__favorite-icon path {
+  fill: $middle-opacity-cherry-color;
+}
+
+.characters__favorite input ~ .characters__favorite-icon circle {
+  fill: $opacity-black-color;
+}
+
+.characters__delete-button {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  width: 22px;
+  height: 22px;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+.characters__delete-button::before,
+.characters__delete-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 5px;
+  width: 22px;
+  height: 3px;
+  background-color: $dark-blue-color;
+  opacity: 0.4;
+}
+
+.characters__item:hover .characters__delete-button::before,
+.characters__item:hover .characters__delete-button::after {
+  background-color: $middle-cherry-color;
+  opacity: 1;
+}
+
+.characters__delete-button::before {
+  transform: rotate(45deg);
+}
+
+.characters__delete-button::after {
+  transform: rotate(-45deg);
+}
