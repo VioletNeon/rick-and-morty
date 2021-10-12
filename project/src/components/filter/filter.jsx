@@ -7,8 +7,8 @@ function Filter(props) {
   const [nameFilter, setName] = useState('');
   const [statusFilter, setStatus] = useState('');
   const [speciesFilter, setSpecies] = useState('');
-  const [typeFilter, setType] = useState('');
   const [genderFilter, setGender] = useState('');
+  const [typeFilter, setType] = useState('');
 
   const setFilterParameters = () => {
     const allParameters = {
